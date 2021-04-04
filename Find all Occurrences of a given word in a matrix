@@ -1,0 +1,58 @@
+//Find all Occurrences of a given word in a matrix
+import java.util.*;
+public class Graph 
+{
+	static int rowNum[] = {-1, -1, -1, 0, 0, 1, 1, 1};
+	static int colNum[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+	public static boolean isSafe(int row,int col,int prevrow,int prevcol,char mat[][],char word[] )
+	{
+		if(row>=0 && col>=0 && row<mat.length && col<mat[0].length && !(row==prevrow && col==prevcol))
+			return true;
+		return false;
+	}
+	public static void dfs(String path,char mat[][],int row,int col,int prevrow,int prevcol,char[] word,int count)
+	{
+		if(count>word.length-1 || mat[row][col]!=word[count])
+			return;
+		
+		path += (word[count]) + "(" + String.valueOf(row)
+        + ", " + String.valueOf(col) + ") ";
+		
+		if(count==word.length-1)
+		{
+			System.out.println(path);
+			return ;
+		}
+		for(int i=0;i<8;i++)
+		{
+			if(isSafe(row+rowNum[i],col+colNum[i],prevrow,prevcol,mat,word))
+			{
+				dfs(path,mat,row+rowNum[i],col+colNum[i],row,col,word,count+1);
+			}
+		}
+	}
+	public static void findWords(char mat[][],char word[],int n)
+	{
+		
+		for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<mat[0].length;j++)
+			{
+				if(mat[i][j]==word[0])
+				{
+					dfs("",mat,i,j,-1,-1,word,0);
+				}
+			}
+		}
+	}
+	public static void main(String[] args) 
+	{
+		char mat[][]=  {{'B', 'N', 'E', 'Y', 'S'},
+                        {'H', 'E', 'D', 'E', 'S'},
+                        {'S', 'G', 'N', 'D', 'E'}};
+		
+		char []word ="DES".toCharArray();
+		  
+	    findWords(mat, word, mat.length);
+	}
+}
