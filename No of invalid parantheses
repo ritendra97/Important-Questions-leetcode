@@ -1,0 +1,29 @@
+import java.util.Stack;
+
+public class StringPractice {
+	
+    public static int invalidexpression(String s) {
+		
+		Stack<Character> st = new Stack<Character>();
+		
+		for(int i=0;i<s.length();i++) {
+			char ch = s.charAt(i);
+			if(ch=='(') {
+				st.push(ch);
+			}else {
+				if(!st.isEmpty() && st.peek()=='(') {
+					st.pop();
+				}else if(st.isEmpty() || st.peek()==')') {
+					st.push(ch);
+				}
+			}
+		}
+		return st.size();
+	}
+	public static void main(String[] args) {
+	
+		String s = ")(";
+		System.out.println(invalidexpression(s));
+	}
+
+}
