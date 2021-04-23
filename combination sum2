@@ -1,0 +1,35 @@
+import java.util.*;
+public class Solution {
+	public static void combinationSum2Util(int index, List<List<Integer>> result, int[] candidates, int target, List<Integer> comb){
+		
+		if(target==0) {
+			result.add(new ArrayList<>(comb));
+			return;
+		}
+		for(int i=index;i<candidates.length;i++) {
+			
+			if(i>index && candidates[i]==candidates[i-1]) {
+				continue;
+			}
+			if(candidates[i]>target)
+				break;
+			
+			comb.add(candidates[i]);
+			combinationSum2Util(index+1,result,candidates,target-candidates[i],comb);
+			comb.remove(comb.size()-1);
+		}
+	}
+    public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        
+    	List<List<Integer>> result = new ArrayList<List<Integer>>();
+    	Arrays.sort(candidates);
+    	combinationSum2Util(0,result,candidates,target,new ArrayList<Integer>());
+    	
+    	return result;
+    }
+	public static void main(String[] args) {
+		
+		int [] candidates = {10,1,2,7,6,1,5};
+	}
+
+}
