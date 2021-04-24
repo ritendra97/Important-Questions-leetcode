@@ -1,0 +1,60 @@
+// Your 20 testcases passes from 112
+public class StackProblem {
+
+    public static int minMoves(int[] nums, int k) {
+    
+    	if(nums.length==0)
+			return 0;
+		int n = nums.length;
+		
+		int ones=0;
+		int zeros=0;
+		int i=0;
+		for(;i<n;i++) {	
+			if(nums[i]==1) {
+				ones++;
+			}
+			if(nums[i]==0)
+				zeros++;
+			if(ones==k)
+				break;
+		}
+		
+		int p=0;
+		int q=i;
+		int min_swap = zeros;
+		while(true) {
+			
+			boolean flag1=false;
+			boolean flag2=false;
+			while(p<q && ones>=k) {
+				if(nums[p]==0)
+					zeros--;
+				if(nums[p]==1)
+					ones--;
+				p++;
+				min_swap = Math.min(min_swap, zeros);
+				flag2=true;
+			}
+			while(q<n-1 && ones<=k) {
+				q++;
+				if(nums[q]==0)
+					zeros++;
+				if(nums[q]==1)
+					ones++;
+				min_swap = Math.min(min_swap, zeros);
+				flag1=true;
+			}
+			if(flag1==false && flag2==false)
+				break;
+		}
+		return min_swap;
+	}
+	public static void main(String[] args) {
+
+		int[] nums = {1,0,1,1,0,1,1,1,0,1,1,0,1,0,0,0};
+		int k = 6;
+		System.out.println(minMoves(nums,k));
+	}
+
+}
