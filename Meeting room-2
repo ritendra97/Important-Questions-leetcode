@@ -1,0 +1,38 @@
+import java.util.*;
+public class Solution {
+	
+	public static int minMeetingRooms(int[][] intervals) {
+		
+		Arrays.sort(intervals,(a,b)->Integer.compare(a[0],b[0]));
+		
+		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+		
+		int count=0;
+		for(int[] itv :intervals) {
+			
+			if(pq.isEmpty()) {
+				count++;
+				pq.add(itv[1]);
+			}else {
+				if(itv[0]>=pq.peek()) {
+					pq.poll();
+				}else {
+					count++;
+				}
+				pq.add(itv[1]);
+			}
+		}
+		return count;
+	}
+	public static void main(String[] args) {
+
+		int intervals[][]= {{2,15},
+		            		{36,45},
+		    		        {9,29},
+		    		        {16,32},
+		    		        {4,9}};
+		
+		System.out.println(minMeetingRooms(intervals));
+	}
+
+}
