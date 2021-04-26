@@ -1,0 +1,120 @@
+//Print sums of all subsets of a given set
+import java.util.*;
+//Print sums of all subsets of a given set
+// TC -> 2^n +2^nLog(2^n)
+import java.util.*;
+public class Solution 
+{
+	public static int findSum(ArrayList<Integer> curr) {
+		
+		int sum=0;
+		for(int i=0;i<curr.size();i++) {
+			
+			sum+=curr.get(i);
+		}
+		
+		return sum;
+	}
+    public static void subsetUtil(ArrayList<Integer> result,int index,int arr[],ArrayList<Integer> curr) {
+		
+		if(index==arr.length) {
+			int sum = findSum(curr);
+			result.add(sum);
+			return;
+		}
+		curr.add(arr[index]);
+		subsetUtil(result,index+1,arr,curr);
+		curr.remove(curr.size()-1);
+		subsetUtil(result,index+1,arr,curr);
+	}
+	public static ArrayList<Integer> subset(int arr[]) {
+		
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		
+		subsetUtil(result,0,arr,new ArrayList<>());
+		
+		Collections.sort(result);
+		return result;
+	}
+	public static void main(String[] args) {
+		
+		int arr[] = {2, 3};
+		System.out.println(subset(arr));
+	}
+}
+
+
+
+
+
+
+
+
+
+public class Solution 
+{
+    public static void findsumofallSubsetUtil(int index, int arr[],ArrayList<Integer> subset,int sum) {
+		
+    	if(index==arr.length) {
+    		subset.add(sum);	
+    		return;
+    	}
+    	findsumofallSubsetUtil(index+1,arr,subset,sum+arr[index]);
+    	findsumofallSubsetUtil(index+1,arr,subset,sum);
+	}
+    
+	public static ArrayList<Integer> findsumofallSubset(int arr[]) {
+		
+		ArrayList<Integer> curr = new ArrayList<Integer>();
+		findsumofallSubsetUtil(0,arr,curr,0);
+		
+		Collections.sort(curr);
+		return curr;
+		
+	}
+	public static void main(String[] args) {
+		
+		int arr[] = {2, 4, 5};
+		System.out.println(findsumofallSubset(arr));
+	}
+}
+import java.util.*;
+public class Solution 
+{
+	public static int findSum(ArrayList<Integer> curr) {
+		
+		int sum=0;
+		for(int i=0;i<curr.size();i++) {
+			
+			sum+=curr.get(i);
+		}
+		
+		return sum;
+	}
+    public static void subsetUtil(ArrayList<Integer> result,int index,int arr[],ArrayList<Integer> curr) {
+		
+		if(index==arr.length) {
+			int sum = findSum(curr);
+			result.add(sum);
+			return;
+		}
+		curr.add(arr[index]);
+		subsetUtil(result,index+1,arr,curr);
+		curr.remove(curr.size()-1);
+		subsetUtil(result,index+1,arr,curr);
+	}
+	public static ArrayList<Integer> subset(int arr[]) {
+		
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		
+		subsetUtil(result,0,arr,new ArrayList<>());
+		
+		Collections.sort(result);
+		return result;
+	}
+	public static void main(String[] args) {
+		
+		int arr[] = {2, 3};
+		System.out.println(subset(arr));
+	}
+}
