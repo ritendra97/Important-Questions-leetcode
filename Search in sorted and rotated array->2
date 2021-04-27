@@ -1,0 +1,39 @@
+//Search in sorted and rotated array->2
+class Solution {
+    
+    
+    public int helper(int nums[],int low,int high,int x){
+        
+        while(low<=high){
+            
+            int mid = low+(high-low)/2;
+            
+            
+            if(nums[mid]==x)
+                return mid;
+            if(nums[low]<=nums[mid]){
+                
+                if(nums[low]<=x && nums[mid]>=x){
+                    high = mid-1;
+                }else{
+                    low = mid+1;
+                }
+                    
+            }else if(nums[high]>=nums[mid]){
+                
+                if(nums[high]>=x && nums[mid]<=x){
+                    low = mid+1;
+                }else{
+                    high = mid-1;
+                }
+                
+            }
+        }
+        return -1;
+    }
+    public int search(int[] nums, int target) {
+        
+        return helper(nums,0,nums.length-1,target);
+    }
+    
+}
