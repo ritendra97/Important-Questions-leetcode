@@ -1,0 +1,27 @@
+//Combination Sum III
+//O(k * 2 ^ n) is the time complexity of Combination Sum II: k is average length of each solution, and we need O(k) time to copy new linkedlist when we get one combination.
+// Solution space: Since we use one element ONLY for one time, so, for the combinations with k elements, the number of different choices is C(n, k) .
+
+class Solution {
+    
+   public static void dfs(int k, int remainingSum, int start, List<List<Integer>> sums, LinkedList<Integer> sum){
+        
+		if(remainingSum == 0 && sum.size() == k) 
+        	sums.add(new ArrayList(sum));
+        else if(remainingSum < 0 || sum.size() > k)
+        	return;
+        
+        for(int i = start; i < 10; i++){
+            sum.add(i);
+            dfs(k, remainingSum - i, i + 1, sums, sum);
+            sum.removeLast();
+        }
+        
+    }
+	public static List<List<Integer>> combinationSum3(int k, int n) {
+		
+		List<List<Integer>> sums = new ArrayList<List<Integer>>();
+        dfs(k, n, 1, sums, new LinkedList<Integer>());
+        return sums;
+	}
+}
