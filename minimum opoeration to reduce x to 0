@@ -1,0 +1,36 @@
+//minimum opoeration to reduce x to 0
+class Solution {
+    
+    public int minOperations(int[] nums, int x) {
+        
+        int total=0;
+        if(nums.length==0)
+            return 0;
+        
+        for(int i=0;i<nums.length;i++){
+            total+=nums[i];
+        }
+        
+        int output = Integer.MAX_VALUE;
+        int right = 0;
+        int left = 0;
+        int curr_total=0;
+        
+        while(right<nums.length){
+            
+            curr_total+=nums[right];
+            while(curr_total>total-x && left<=right){
+                
+                curr_total-=nums[left];
+                left++;
+            }
+            if(curr_total == total-x){
+                
+                output = Math.min(nums.length -(right-left+1),output);
+            }
+            right++;
+        }
+        
+        return output==Integer.MAX_VALUE?-1:output;
+    }
+}
