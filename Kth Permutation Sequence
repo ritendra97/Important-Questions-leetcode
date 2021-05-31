@@ -1,0 +1,43 @@
+//Kth Permutation Sequence
+// Bruteforce manner
+import java.util.*;
+
+class Solution {
+	
+    public void getPermutationUtil(ArrayList<Integer> result, String str, String psf) {
+        
+    	if(str.length()==0) {
+    		result.add(Integer.parseInt(psf));
+    		return ;
+    	}
+    	
+    	for(int i =0;i<str.length();i++) {
+    		
+    		char ch = str.charAt(i);
+    		String left = str.substring(0,i);
+    		String right = str.substring(i+1);
+    		String required = left+right;	
+    		getPermutationUtil(result,required, psf+ch);
+    	}
+    }
+    public String getPermutation(int A, int B) {
+        
+    	ArrayList<Integer> ans = new ArrayList<Integer>();
+    	String s="";
+        for(int i=1;i<=A;i++) {
+        	s+=i;
+        }
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        getPermutationUtil(result, s, "");
+        Collections.sort(result);
+        String a = result.get(B-1).toString();
+        return a;
+    }
+    public static void main(String[] args) {
+    	
+		Solution sb = new Solution();
+		System.out.println(sb.getPermutation(3,4));
+	}
+}
+
+// 
