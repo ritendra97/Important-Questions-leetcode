@@ -40,4 +40,38 @@ class Solution {
 	}
 }
 
-// 
+// TC->O(n^2)
+// SC->O(n)
+import java.util.*;
+
+class Solution {
+	
+    public String getPermutation(int A, int B) {
+        
+    	int fact =1;
+    	ArrayList<Integer> result = new ArrayList<>();
+    	for(int i=1;i<A;i++) {
+    		fact = fact*i;
+    		result.add(i);
+    	}
+    	result.add(A);
+    	String ans = "";
+        B=B-1;
+        while(true) {
+        	ans = ans+result.get(B/fact);
+        	result.remove(B/fact);
+        	
+        	if(result.size()==0)
+        		break;
+        	B=B%fact;
+        	fact = fact/result.size();
+        }
+        return ans;
+    }
+    public static void main(String[] args) {
+    	
+		Solution sb = new Solution();
+		System.out.println(sb.getPermutation(3,4));
+	}
+}
+
