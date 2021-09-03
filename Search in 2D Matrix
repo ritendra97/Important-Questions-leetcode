@@ -31,3 +31,37 @@ class Solution {
         
     }
 }
+
+Time Complexity O(n)
+Space Complexity O(1)
+
+import java.util.*;
+
+public class Practice {
+	public static boolean searchMatrix(int[][] matrix, int target) {
+		
+		int l = 0;
+		int r = matrix.length-1;
+		
+		while(l<matrix.length && r>=0) {
+			if(matrix[l][r]==target) {
+				return true;
+			}
+			if(matrix[l][r]>target) {
+				r--;
+			}else {
+				l++;
+			}
+		}
+		
+		return false;
+
+	}
+
+	public static void main(String[] args) {
+
+		int mat[][] = { { 10, 20, 30, 40 }, { 15, 25, 35, 45 }, { 27, 29, 37, 48 }, { 32, 33, 39, 50 } };
+
+		System.out.println(searchMatrix(mat, 19));
+	}
+}
